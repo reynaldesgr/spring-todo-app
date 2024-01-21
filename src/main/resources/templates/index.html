@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ToDo - App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        div.form-container {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        form > input, form > button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        form > button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        form > button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        li span {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>ToDo List</h1>
+<div class="form-container">
+    <form action="/add" method="post" style="display: flex; flex-direction: column;">
+        <input type="text" name="titre" placeholder="Title" required style="margin-bottom: 10px;">
+        <input type="text" name="description" placeholder="Description" style="margin-bottom: 10px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <label style="display: flex; align-items: center;">
+                <input type="checkbox" name="done" style="margin-right: 5px;"> Done
+            </label>
+            <button type="submit" style="padding: 10px 20px;">Add</button>
+        </div>
+    </form>
+</div>
+<div>
+    <ul>
+        <li th:each="todo : ${todos}">
+            <span th:text="${todo.titre}">Title</span>:
+            <span th:text="${todo.description}">Description</span>
+            <span th:text="${todo.done} ? 'Completed' : 'Not completed'">Status</span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
